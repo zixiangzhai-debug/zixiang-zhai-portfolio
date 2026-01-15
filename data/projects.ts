@@ -23,7 +23,7 @@ export const projects: Project[] = [
     type: "Renovation",
     materials: "Steel",
     role: "—",
-    coverImage: "/images/placeholders/cover-1.svg",
+    coverImage: "/projects/substation-renovation/cover.jpg",
     tags: ["Renovation", "Steel"],
     summary: "Replace this summary with your own text."
   },
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     type: "Mountain Shelter",
     materials: "Timber",
     role: "—",
-    coverImage: "/images/placeholders/cover-2.svg",
+    coverImage: "/projects/glacier-mountaineering-hut/cover.jpg",
     tags: ["Timber", "Shelter"],
     summary: "Replace this summary with your own text."
   },
@@ -49,7 +49,7 @@ export const projects: Project[] = [
     type: "Urban Renewal",
     materials: "Timber + Steel",
     role: "—",
-    coverImage: "/images/placeholders/cover-3.svg",
+    coverImage: "/projects/modular-renovation-strategy/cover.jpg",
     tags: ["Modular", "Hybrid"],
     summary: "Replace this summary with your own text."
   },
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     type: "Public Pavilion",
     materials: "Timber",
     role: "—",
-    coverImage: "/images/placeholders/cover-4.svg",
+    coverImage: "/projects/lakeside-community-pavilion/cover.jpg",
     tags: ["Pavilion", "Community"],
     summary: "Replace this summary with your own text."
   },
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     type: "Collection",
     materials: "Mixed",
     role: "—",
-    coverImage: "/images/placeholders/cover-5.svg",
+    coverImage: "/projects/other-works/cover.jpg",
     tags: ["Selected Works"],
     summary: "Use this page to present smaller pieces or experiments."
   }
