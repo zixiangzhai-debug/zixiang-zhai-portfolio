@@ -83,7 +83,8 @@ export const projects: Project[] = [
 
 // Projects shown on the Home page under "Selected Works"
 export const selectedSlugs = [
-  "glacier-mountaineering-hut",
   "substation-renovation",
-  "modular-renovation-strategy"
+  "glacier-mountaineering-hut",
+  "modular-renovation-strategy",
+  "lakeside-community-pavilion",
 ];
