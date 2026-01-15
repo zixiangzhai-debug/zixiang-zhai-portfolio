@@ -14,7 +14,7 @@ export default function HomePage() {
             <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
               Zixiang Zhai
             </h1>
-            <p className="mt-3 max-w-2xl text-base text-zinc-700">
+            <p className="mt-4 text-lg text-neutral-600 whitespace-nowrap">
               Architectural Designer exploring structure, material logic, and adaptable spatial systems.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
