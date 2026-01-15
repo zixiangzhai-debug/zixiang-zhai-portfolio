@@ -1,0 +1,19 @@
+# dependencies
+node_modules
+
+# next.js build output
+.next
+out
+
+# misc
+*.log
+.DS_Store
+
+# env
+.env
+.env.local
+.env.*.local
+
+# editors
+.vscode
+.idea
