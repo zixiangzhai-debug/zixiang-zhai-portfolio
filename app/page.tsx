@@ -12,10 +12,10 @@ export default function HomePage() {
         <Container>
           <div className="py-14 sm:py-18">
             <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 sm:text-4xl">
-              Your Name
+              Zixiang Zhai
             </h1>
             <p className="mt-3 max-w-2xl text-base text-zinc-700">
-              Architectural Designer. Replace this intro with your own positioning statement.
+              Architectural Designer exploring structure, material logic, and adaptable spatial systems.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
