@@ -1,97 +1,117 @@
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
+import { ProjectMeta } from "@/components/ProjectMeta";
+import { projects, type ProjectImage } from "@/data/projects";
 
-export default function AboutPage() {
-  const cvPath = "/cv/Zixiang_Zhai_CV.pdf";
+export function generateStaticParams() {
+  return projects.map((p) => ({ slug: p.slug }));
+}
+
+export default function ProjectPage({ params }: { params: { slug: string } }) {
+  const p = projects.find((x) => x.slug === params.slug);
+  if (!p) return notFound();
+
+  const idx = projects.findIndex((x) => x.slug === p.slug);
+  const prev = idx > 0 ? projects[idx - 1] : null;
+  const next = idx < projects.length - 1 ? projects[idx + 1] : null;
+
+  // Build a single continuous image sequence: cover + gallery (01..)
+  const cover: ProjectImage | null = p.coverImage
+    ? { src: p.coverImage, alt: `${p.title} – cover`, caption: "Cover" }
+    : null;
+
+  const gallery = p.gallery ?? [];
+  const images: ProjectImage[] = cover ? [cover, ...gallery] : gallery;
 
   return (
     <Container>
       <div className="py-12">
-        <h1 className="text-2xl font-semibold text-zinc-950">About + CV</h1>
-        <p className="mt-2 max-w-2xl text-sm text-zinc-600">
-          A concise overview of my academic background, professional experience, and design interests, accompanied by
-          a downloadable CV for professional applications.
-        </p>
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-semibold tracking-tight text-zinc-950">{p.title}</h1>
+          {p.subtitle ? <p className="text-sm text-zinc-600">{p.subtitle}</p> : null}
+        </div>
+
+        <div className="mt-6">
+          <ProjectMeta p={p} />
+        </div>
       </div>
 
-      <Section title="Bio">
-        <div className="max-w-3xl text-sm leading-7 text-zinc-700">
-          <p>
-            I am an architectural designer with a strong focus on structural logic, material systems, and adaptive
-            architectural strategies. My academic background spans architectural education in China, the UK, and the
-            United States, and I am currently pursuing a Master of Advanced Architectural Design at the University of
-            California, Berkeley.
-          </p>
-          <p className="mt-4">
-            My design work is grounded in the integration of structure, construction sequence, and spatial clarity,
-            with particular interests in steel and timber systems, adaptive reuse, and modular architectural strategies.
-            Through academic studios, professional practice, and research-based projects, I have developed a design
-            approach that emphasizes precision, constructability, and the dialogue between existing conditions and new
-            interventions.
-          </p>
-        </div>
-      </Section>
+      <Section title="Overview">
+        {/* Make Overview and Images share the same content column */}
+        <div className="grid grid-cols-1 md:grid-cols-12">
+          {/* left gutter / align with section title rhythm on desktop */}
+          <div className="hidden md:block md:col-span-2" />
 
-      <Section title="Education">
-        <div className="max-w-3xl text-sm leading-7 text-zinc-700">
-          <p>
-            <span className="font-medium text-zinc-950">
-              Master of Advanced Architectural Design (MAAD)
-            </span>
-            , University of California, Berkeley — <span className="text-zinc-600">Expected June 2026</span>
-          </p>
-          <p className="mt-2">
-            <span className="font-medium text-zinc-950">Bachelor of Architecture (Honors)</span> — Joint Program between
-            Wuhan University and the University of Dundee
-          </p>
-        </div>
-      </Section>
-
-      <Section title="Professional Experience">
-        <div className="max-w-3xl text-sm leading-7 text-zinc-700">
-          <p>
-            <span className="font-medium text-zinc-950">Architectural Intern</span>, Central South Architectural Design
-            Institute — <span className="text-zinc-600">Wuhan, China</span>
-          </p>
-          <p className="mt-3">
-            Contributed to civic, commercial, and large-scale infrastructure projects across multiple design phases.
-            Supported design development, 3D modeling, visualization, and construction documentation, and assisted in
-            preparing presentations for client milestones.
-          </p>
-        </div>
-      </Section>
-
-      <Section title="CV">
-        <div className="rounded-2xl border border-zinc-200/70 bg-white p-6">
-          <div className="text-sm font-semibold text-zinc-950">Curriculum Vitae</div>
-          <p className="mt-2 text-sm text-zinc-600">
-            Download the full CV as a PDF.
-          </p>
-
-          <div className="mt-4 flex flex-wrap items-center gap-3">
-            <a
-              href={cvPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex rounded-full bg-zinc-900 px-5 py-2 text-sm font-medium text-white no-underline hover:bg-zinc-800"
-            >
-              Download Full CV (PDF)
-            </a>
-
-            <a
-              href={cvPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-zinc-700 hover:text-zinc-950"
-            >
-              View CV →
-            </a>
+          {/* content column (this width will match Images column) */}
+          <div className="md:col-span-8">
+            <div className="prose prose-zinc text-sm leading-7">
+              <p>
+                {p.summary ??
+                  "Replace this section with your project narrative. You can add drawings, diagrams, and images below."}
+              </p>
+            </div>
           </div>
         </div>
       </Section>
+
+      <Section title="Images">
+        <div className="grid grid-cols-1 md:grid-cols-12">
+          <div className="hidden md:block md:col-span-2" />
+
+          <div className="md:col-span-8">
+            {images.length ? (
+              <div className="mt-2 space-y-8">
+                {images.map((img, i) => (
+                  <figure key={img.src} className="space-y-3">
+                    <div className="overflow-hidden rounded-2xl border border-zinc-200/70 bg-white">
+                      <Image
+                        src={img.src}
+                        alt={img.alt || `${p.title} – image ${i + 1}`}
+                        width={2400}
+                        height={1600}
+                        className="h-auto w-full"
+                        priority={i === 0} // first image (cover) loads faster
+                      />
+                    </div>
+
+                    {img.caption ? <figcaption className="text-sm text-zinc-600">{img.caption}</figcaption> : null}
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-2 rounded-2xl border border-zinc-200/70 bg-white p-5 text-sm text-zinc-600">
+                No images yet. Put images in{" "}
+                <code className="rounded bg-zinc-100 px-1 py-0.5">/public/projects/{p.slug}/</code> and reference them
+                in <code className="rounded bg-zinc-100 px-1 py-0.5">data/projects.ts</code>.
+              </div>
+            )}
+          </div>
+        </div>
+      </Section>
+
+      <div className="pb-14 flex items-center justify-between gap-3">
+        {prev ? (
+          <Link className="text-sm text-zinc-700 hover:text-zinc-950 no-underline" href={`/works/${prev.slug}`}>
+            ← {prev.title}
+          </Link>
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <Link className="text-sm text-zinc-700 hover:text-zinc-950 no-underline" href={`/works/${next.slug}`}>
+            {next.title} →
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
     </Container>
   );
 }
+
 
 
 
