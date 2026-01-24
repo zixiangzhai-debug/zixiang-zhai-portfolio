@@ -8,7 +8,9 @@ export default function AboutPage() {
     <Container>
       <div className="py-12">
         <h1 className="text-2xl font-semibold text-zinc-950">About + CV</h1>
-        <p className="mt-2 max-w-2xl text-sm text-zinc-600">
+
+        {/* ✅ 改这里：max-w-2xl -> max-w-3xl，让它和下面正文对齐 */}
+        <p className="mt-2 max-w-3xl text-sm text-zinc-600">
           A concise overview of my academic background, professional experience, and design interests, accompanied by a
           downloadable CV for professional applications.
         </p>
@@ -97,5 +99,6 @@ export default function AboutPage() {
     </Container>
   );
 }
+
 
 

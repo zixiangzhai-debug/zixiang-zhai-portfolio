@@ -11,7 +11,9 @@ export default function ContactPage() {
     <Container>
       <div className="py-12">
         <h1 className="text-2xl font-semibold text-zinc-950">Contact</h1>
-        <p className="mt-2 max-w-2xl text-sm text-zinc-600">
+
+        {/* ✅ 这里移除了 max-w-2xl */}
+        <p className="mt-2 text-sm text-zinc-600">
           For professional inquiries, collaborations, or further information,
           please feel free to get in touch using the details below.
         </p>
@@ -60,11 +62,11 @@ export default function ContactPage() {
         </Section>
       </div>
 
-      {/* Footer style contact repeat (optional but good practice) */}
       <div className="mt-20 text-sm text-zinc-500">
         © {new Date().getFullYear()} Zixiang Zhai
       </div>
     </Container>
   );
 }
+
 
