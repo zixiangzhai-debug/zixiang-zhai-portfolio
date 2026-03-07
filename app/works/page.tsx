@@ -8,7 +8,7 @@ export default function WorksPage() {
     <Container>
       <div className="py-12">
         <h1 className="text-2xl font-semibold text-zinc-950">Works</h1>
-        <p className="mt-2 max-w-2xl text-sm text-zinc-600">
+        <p className="text-lg text-neutral-600 max-w-4xl">
           Selected academic and independent projects focusing on timber construction, structural systems, and architectural form.
         </p>
       </div>
