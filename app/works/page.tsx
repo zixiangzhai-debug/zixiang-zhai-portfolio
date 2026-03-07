@@ -9,7 +9,7 @@ export default function WorksPage() {
       <div className="py-12">
         <h1 className="text-2xl font-semibold text-zinc-950">Works</h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-600">
-          Replace this text with a short note about your portfolio, role, and interests.
+          Selected academic and independent projects focusing on timber construction, structural systems, and architectural form.
         </p>
       </div>
 
